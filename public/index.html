@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="MEANapp">
+<head>
+    <title>FoodTastic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootswatch.css"/>  
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/ngStorage.min.js"></script>
+    <script src="scripts/ngCart.js"></script> 
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="js/controllers.js"></script>
+    <script type="text/ng-template" id="template/ngCart/summary.html">
+    
+        {{ ngCart.getTotalItems() }}
+    </script>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse bg-primary" ng-controller="logoutController">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Food Tastic  </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="/admin" 
+                        ng-show="userPermission == 'admin'">Admin
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="/admin/stats">Dashboard</a></li>
+                          <li><a href="/admin/users">Users</a></li>
+                          <li><a href="/admin/products">Products</a></li>
+                          <li><a href="/admin/city">Cities</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/cart"> <span class="badge">   <ngcart-summary></ngcart-summary> 
+                            </span><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
+                    <li><a href="/account" ng-show="authenticated">Account</a></li>
+                    <li><a href="/login"               ng-hide="authenticated">Login </a></li>
+                    <li><a href='' ng-click="logout()" ng-show="authenticated">Logout</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" ng-view>
+        <!--Views loaded here via $routeProvider in controller.js-->
+    </div>
+
+    
+
+   
+
+</body>
+</html>

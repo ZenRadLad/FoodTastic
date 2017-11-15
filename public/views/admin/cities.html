@@ -1,0 +1,26 @@
+<div class="container" ng-controller="adminController">
+
+
+    <div class="row"><br>
+      <h3>Add new city</h3>
+
+		<form class="form-horizontal" novalidate ng-submit="addCity()" name="addCityForm">
+	            <fieldset>
+	            <div class="form-group">
+	                    <label for="inputCity" class="col-lg-3 control-label">City</label>
+	                    <div class="col-lg-9">
+	                        <input type="text"
+	                               class="form-control"
+	                               id="inputCity"
+	                               ng-model="name"
+	                               required placeholder="city">
+	                    </div>
+	                </div>
+	            <button class="btn btn-success pull-right" type="Submit" ng-disabled="addCityForm.$invalid">Submit</button> 
+	     
+	    </fieldset>
+	    </form>
+    </div>
+
+
+</div>

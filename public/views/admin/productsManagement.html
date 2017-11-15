@@ -1,0 +1,87 @@
+<div class="container" ng-controller="adminController">
+    <div id="products" class="row"><br><br>      
+
+      	<h4>Add Product</h4>
+      	<form class="form-horizontal" novalidate ng-submit="createProduct()" name="createProductForm">
+            <fieldset>
+            <div class="form-group">
+                    <label for="inputUsername" class="col-lg-3 control-label">Name</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputUsername"
+                               ng-model="name"
+                               required placeholder="name">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputPicture" class="col-lg-3 control-label">Picture Path</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputPicture"
+                               ng-model="imagePath"
+                               required placeholder="picture path">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputDescription" class="col-lg-3 control-label">Description</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputDescription"
+                               ng-model="description"
+                               required placeholder="description">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputPrice" class="col-lg-3 control-label">Price</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputPrice"
+                               ng-model="price"
+                               required placeholder="price">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputStock" class="col-lg-3 control-label">Stock</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputStock"
+                               ng-model="stock"
+                               required placeholder="stock">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputCategory" class="col-lg-3 control-label">Category</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputCategory"
+                               ng-model="category"
+                               required placeholder="category">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputCity" class="col-lg-3 control-label">City</label>
+                    <div class="col-lg-9">
+                         <select id="citiesList"  ng-model="selectedCity"  class="form-control input-sm">
+                            <option ng-repeat="city in cities" value="{{city.name}}">{{city.name}}</option>
+                         </select>        
+                    </div>
+                </div>
+         
+             <button class="btn btn-success pull-right" type="Submit" ng-disabled="createProductForm.$invalid">Submit</button> 
+
+         </fieldset>         
+       </form>
+    </div>
+</div>

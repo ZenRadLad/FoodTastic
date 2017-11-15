@@ -1,0 +1,36 @@
+
+	<div class="row" ng-controller="statsController">
+
+		<br><br><h1>Stats :</h1><br><br>
+
+	    <div class="col-sm-4">
+	    	<h3>Sales by Category :</h3><br><br>
+   
+			  <select id="selectCategory" ng-model="selectedCategory"  ng-change="getStatsByCategory(selectedCategory)">
+
+
+	                        <option value="Vegetables">Vegetables</option>
+	                        <option value="Fruits">    Fruits</option> 
+	                        <option value="Meats">     Meats</option>
+	                        <option value="Dairy">     Dairy</option>
+	           </select>  <br><br>
+			   
+			   <h1>{{stats}}</h1>
+	    </div>
+
+	    <div class="col-sm-4">
+	    	<h3>New users :</h3>
+
+			<h5><h1>{{lastMonthUsers}}</h1> <strong>Last Month</strong></h5>			
+			<h5><h1>{{lastWeekUsers}}</h1>  <strong>Last Week</strong></h5>	
+	    </div>
+
+	    <div class="col-sm-4">
+	     <h3>Product sales :</h3>
+		    	<h5><h1>{{productSalesWeek}}</h1>  <strong>Last Week </strong></h5>
+		    	<h5><h1>{{productSalesMonth}}</h1> <strong>Last Month</strong></h5>
+		    	<h5><h1>{{productSalesYear}}</h1>  <strong>Last Year </strong></h5>	
+	    </div>
+
+  </div>
+

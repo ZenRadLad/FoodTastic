@@ -1,0 +1,70 @@
+<!-- cart.html -->
+<div class="container" ng-controller="cartController">
+ <script type="text/ng-template" id="template/ngCart/cart.html">
+	<div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
+	    	<h2 class="display-2">Cart  </h2><br><br>
+			<h5>Your cart is empty.</h5>
+	</div>
+
+	<div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
+		<h2 class="display-2">Cart  </h2><br><br>
+	    <table class="table table-striped ngCart cart">
+	        <thead>
+	        <tr>
+	            <th></th>
+	            <th></th>
+	            <th>Quantity</th> 
+	            <th>Amount</th>
+	            <th>Total</th>
+
+	        </tr>
+	        </thead>
+	        <tfoot>
+	        <tr>
+	            <td></td>
+	            <td></td>
+	            <td></td>
+	            <td><strong>Total :</strong></td>
+	            <td>{{ ngCart.totalCost() | currency }}</td>
+
+	        </tr>
+	        </tfoot>
+	        <tbody>
+	        <tr ng-repeat="item in ngCart.getCart().items track by $index">
+	            <td><span class="fa fa-trash-o" aria-hidden="true" ng-click="ngCart.removeItemById(item.getId())"></span></td>
+
+	            <td>{{ item.getName() }}</td>
+	            <td><span class="fa fa-minus" aria-hidden="true" ng-class="{'disabled':item.getQuantity()==1}"
+	                      ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp;
+	                {{ item.getQuantity() | number }}&nbsp;&nbsp;
+	                <span  class="fa fa-plus" aria-hidden="true" ng-click="item.setQuantity(1, true)"></span></td>
+	            <td>{{ item.getPrice() | currency}}</td>
+	            <td>{{ item.getTotal() | currency }}</td>
+
+	        </tr>
+	        </tbody>
+	   	 </table>
+	</div>
+
+</script>
+
+
+	    <ngcart-cart></ngcart-cart>
+	    <ngcart-checkout service="http">Checkout </ngcart-checkout>
+
+	
+	    <script type="text/ng-template" id="template/ngCart/checkout.html">
+			<div ng-if="service=='http' || service == 'log'">
+    			
+    			<button class="btn btn-success pull-right" ng-click="checkout()" ng-disabled="!ngCart.getTotalItems()" ng-transclude>Checkout <i class="fa fa-angle-right"></i> </button><br>
+ 
+    			<!--<a class="btn btn-info pull-right" href="/login" ng-show="!authenticated">Login to Checkout</a>-->
+
+
+
+			</div></br></br>
+		</script>
+
+		
+</div>
+<!-- cart.html -->

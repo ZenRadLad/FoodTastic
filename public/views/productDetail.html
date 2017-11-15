@@ -1,0 +1,192 @@
+<!-- product Details-->
+<div class="product-content product-wrap clearfix" ng-controller="productDetailController"  data-ng-init="findOne()">
+        <div class="row">
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="product-image"> 
+                        <img ng-src="../../{{product.imagePath}}"  class="img-responsive"> 
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="product-detail">
+                            <h3 class="name">{{product.name}}</h3>
+                                
+                            <h5>{{product.description}}</h5>
+                            <p class="price-container">
+                                    <span>{{product.price}} <span class="glyphicon glyphicon-eur"></span></span>
+                            </p>
+                        </div>
+                       
+                        <div class="product-info smart-form">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6"> 
+                                    <ngcart-addtocart id="{{product._id}}" name="{{product.name}}" price="{{product.price}}"  
+                                     quantity="1" category="{{product.category}}">Add to Cart</ngcart-addtocart><br><br>
+
+                                      <button type="button" ng-show="userPermission == 'admin'"   class="btn btn-info" data-toggle="modal" data-target="#myModal">Update product</button><br><br>
+
+                                  
+                                        <a ng-show="userPermission == 'admin'" ng-click="deleteProduct(product._id)" class="btn btn-danger" role="button">
+                                        Delete product</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+
+
+
+
+ <!-- Product Update Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+    <form class="form-horizontal" novalidate ng-submit="updateProduct(product._id)" name="updateProductForm">
+      <fieldset>
+                
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Update Product</h4>
+          </div>
+
+        <div class="modal-body">
+                <div class="form-group">
+                    <label for="inputUsername" class="col-lg-3 control-label">Name</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputUsername"
+                               ng-model="name"
+                               required placeholder="name">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputPicture" class="col-lg-3 control-label">Picture Path</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputPicture"
+                               ng-model="imagePath"
+                               required placeholder="picture path">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputDescription" class="col-lg-3 control-label">Description</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputDescription"
+                               ng-model="description"
+                               required placeholder="description">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputPrice" class="col-lg-3 control-label">Price</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputPrice"
+                               ng-model="price"
+                               required placeholder="price">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputStock" class="col-lg-3 control-label">Stock</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputStock"
+                               ng-model="stock"
+                               required placeholder="stock">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputCategory" class="col-lg-3 control-label">Category</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputCategory"
+                               ng-model="category"
+                               required placeholder="category">
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="inputCity" class="col-lg-3 control-label">City</label>
+                    <div class="col-lg-9">
+                        <input type="text"
+                               class="form-control"
+                               id="inputCity"
+                               ng-model="city"
+                               required placeholder="city">
+                    </div>
+                </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+             <button class="btn btn-success" type="Submit">Submit</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div></div>
+
+        </fieldset>
+       </form>
+      </div>    
+  </div>
+
+</div> <!-- end of productDetailCtrl -->
+
+
+<script type="text/ng-template" id="template/ngCart/addtocart.html">
+    <div ng-hide="attrs.id">
+        <a class="btn btn-primary" ng-disabled="true" ng-transclude></a>
+    </div>
+    <div ng-show="attrs.id">
+        <div>
+            <span ng-show="quantityMax">
+                <select name="quantity" id="quantity" ng-model="q"
+                        ng-options=" v for v in qtyOpt"></select>
+            </span>
+            <a class="btn btn-sm btn-primary"
+               ng-click="ngCart.addItem(id, name, price, q, data, category)"
+               ng-transclude></a>
+        </div>
+
+        <mark  ng-show="inCart()">
+            Item added to cart <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Remove</a>
+        </mark>
+    </div>
+</script>
+
+
+<!-- product Suggestions-->
+<div class="column" ng-controller="productsListController">
+
+    <h3>Suggested products : </h3><br>
+        <div class="col-md-4"  
+            ng-repeat="product in products | filter:{category : product.category} " ng-if="product.name != displayedProduct">   
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+
+                                <div class="product-image"> 
+                                    <a href="/products/{{product.city}}/{{product._id}}" style="cursor: pointer;">
+                                      <img ng-src="../../{{product.imagePath}}"  class="img-responsive"> 
+                                    </a>
+                                </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="product-detail">
+                              <a href="/products/{{product.city}}/{{product._id}}" style="cursor: pointer;">{{product.name}}</a>
+                                    <p class="price-container">
+                                        {{product.price}}<span class="glyphicon glyphicon-eur"></span>
+                                    </p>
+                             </div>
+                    </div>
+        </div>
+</div>
+
+

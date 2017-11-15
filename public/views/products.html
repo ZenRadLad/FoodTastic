@@ -1,0 +1,61 @@
+<!--products.html-->
+
+<!-- FilterBar -->
+<div class="container" ng-controller="productsListController">
+        <div class="row">
+            <div id="filter-panel" class="filter-panel">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-inline">
+                            <label class="filter-col productsFilters"  for="SearchBox" >Search :</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control input-sm" ng-model="query.name" id="SearchBox">
+                            </div>
+
+                            <label class="filter-col productsFilters" for="categoryList">Category :</label>
+                            <div class="form-group">
+                                <select id="categoryList"  ng-model="selectedCategory"  class="form-control input-sm">
+                                    <option value="{{undefined}}">All</option>
+                                    <option ng-repeat="product in products | categoryFilter: 'category' " 
+                                    value="{{product.category}}">{{product.category}}</option>
+                                </select>                                
+                            </div> 
+
+                            <label class="filter-col productsFilters" for="PriceList">Price :</label>
+                            <div class="form-group">
+                                <select id="PriceList" class="form-control input-sm"  
+                                ng-model="sortItem.store" ng-options="item.name for item in sortOptions.stores">
+                                </select>                                
+                            </div> 
+                    </div>
+                </div>
+            </div>    
+</div>
+   
+<!-- Products View -->
+<div class="column">
+        <div class="col-md-3" ng-repeat="product in products | filter:query | filter:selectedCategory | orderBy:'price':reverse"> 
+            <div class="col-md-3" ng-show="products.length < 1"> No products to show.</div>
+            <div class="simpleCart_shelfItem">
+            
+                <a href="/products/{{product.city}}/{{product._id}}" style="cursor: pointer;">
+                    <img ng-src="../{{product.imagePath}}" class="item_thumb"/>
+                </a>
+
+                <div class="row">
+                <a href="/products/{{product.city}}/{{product._id}}" class="item_name productName" style="cursor: pointer;">{{product.name}}</a>
+                 <p class="item_description">{{product.description}}</p>
+                    <div class="simpleStore_getDetail_container">
+                        <span class="item_price ">{{product.price}} €</span>
+                    </div>
+                </div>
+              </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--products.html-->
