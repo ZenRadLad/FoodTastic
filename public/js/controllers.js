@@ -86,8 +86,6 @@ app.controller('productDetailController', function($scope,  $routeParams,$rootSc
             console.log('Error from productDetailController : ' + error);
     };
     
-
-
     // delete Product 
     $scope.deleteProduct = function(productId){
 
@@ -127,8 +125,6 @@ app.controller('productDetailController', function($scope,  $routeParams,$rootSc
                 console.log(error.data);
             }); 
     };    
-
-
 });
 
 app.controller('logoutController', function($scope, $localStorage, $sessionStorage, $location, $http, $rootScope){
@@ -327,10 +323,7 @@ app.controller('accountController', function($scope, $localStorage, $sessionStor
 
 
 
-app.controller('cartController', function($scope, ngCart, $location, $http, $rootScope){
-       
-
-});
+app.controller('cartController', function($scope, ngCart, $location, $http, $rootScope){});
 
 app.controller('statsController', function($scope, ngCart, $http){
      
@@ -369,11 +362,7 @@ app.controller('statsController', function($scope, ngCart, $http){
           $scope.productSalesYear  = response.data.productSalesYear[0].quantity; 
     }),function(error) {
             console.log('Error: ' + error);
-    };
-
-
-  
-    
+    };    
 });
 
 
@@ -465,7 +454,6 @@ app.controller('adminController', function($scope, $localStorage, $http, $locati
                     console.log('Error: ' + error);
             };              
     };
-
 
     //add new city
     $scope.addCity = function(){
@@ -580,7 +568,6 @@ app.config(function($routeProvider, $locationProvider) {
             authenticated : true
 
         })
-
         .otherwise({ redirectTo : "/"}); 
         $locationProvider.html5Mode({ enabled: true, requireBase: false });      
 });

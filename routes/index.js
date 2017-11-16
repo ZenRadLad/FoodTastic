@@ -23,7 +23,7 @@ app.get('/login', function (req, res, next){
 
 //products by city
 app.get('/products/:city', function (req, res, next){
-    // find :city products with stock not equal to 0
+
     Product.find({ 'city': req.params.city,  'stock' : { $ne: 0 } }, function(err, products) {
             if (err) {
                 return res.send(err);
@@ -213,24 +213,12 @@ app.get('/admin/stats/users', function (req, res, next){
       
 });
 
-
-
 //update product by id
 app.put('/admin/stats/update/:id', function (req, res, next){
     
     var id = new ObjectId(req.params.id);
 
-  // 1. Input validation. Front end validation exists, but this functions as a fail-safe
-    /*
-    req.checkBody('name', 'name is required').notEmpty();
-    req.checkBody('imagePath', 'imagePath is required').notEmpty();
-    req.checkBody('description', 'description is required').notEmpty();
-    req.checkBody('price', 'price is required').notEmpty();
-    req.checkBody('stock', 'stock is required').notEmpty();
-    req.checkBody('category', 'category is required').notEmpty();
-    req.checkBody('city', 'city is required').notEmpty();*/
-
-    var errors = req.validationErrors(); // returns an object with results of validation check
+    var errors = req.validationErrors();
     if (errors) {
         res.status(400).send(errors);
         return;
@@ -313,10 +301,6 @@ app.post('/admin/city/create', function (req, res, next){
                 
 });
 
-
-
-
-
 //get number of products sold by category
 app.post('/admin/stats/category', function (req, res, next){
 
@@ -367,8 +351,6 @@ app.post('/admin/stats/category', function (req, res, next){
             }
         }
 });
-
-
 
 //Block/Unblock user
 app.put('/admin/status/:id', function(req, res, next){
@@ -423,7 +405,6 @@ function formatDate(date) {
   return hourAndMinutes + ' ' +  day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
 
-
 //checkout
 app.post('/checkout', authorizeRequest,  function (req, res, next){ 
 
@@ -432,7 +413,6 @@ app.post('/checkout', authorizeRequest,  function (req, res, next){
      res.send("User is blocked, Please contact support unblock account to be able to checkout.");
   }
   else{
-
 
   var pdf   = new PDFDocument();
   var table = new PdfTable(pdf, { bottomMargin: 30});
@@ -451,16 +431,9 @@ app.post('/checkout', authorizeRequest,  function (req, res, next){
   pdf.fontSize(13).text('Client name : ' + clientName, 80, 220);     
   pdf.fontSize(13).text('Email : ' + clientEmail, 80, 240);
   pdf.fontSize(13).text('Date : ' + date, 80, 260);
-  pdf.moveDown();
-  pdf.moveDown();
-  pdf.moveDown();
-  pdf.moveDown();
-  pdf.moveDown();
-  pdf.moveDown();
-  pdf.moveDown();
+  pdf.moveDown();pdf.moveDown();pdf.moveDown();pdf.moveDown();
+  pdf.moveDown();pdf.moveDown();pdf.moveDown();
 
- 
-   // add some plugins (here, a 'fit-to-width' for a column) 
    table.addPlugin(new (require('voilab-pdf-table/plugins/fitcolumn'))({
                 column: 'name'
             }))
@@ -501,8 +474,6 @@ app.post('/checkout', authorizeRequest,  function (req, res, next){
                 tb.addHeader();
             });
 
-
-
             var data = [];
             for (var i = 0; i < req.body.items.length; i++) {
                  data.push({ 
@@ -534,7 +505,6 @@ app.post('/checkout', authorizeRequest,  function (req, res, next){
                 if (err) {console.log("error ==> "  + err)};
           });
 
-
         //add to stats schema  purchases 
        var stats = new Stats(
         { quantity: product.quantity,
@@ -546,8 +516,6 @@ app.post('/checkout', authorizeRequest,  function (req, res, next){
             }
            console.log('Stats saved !');
         });
-
-
      };
 
         pdf.pipe(fs.createWriteStream("pdf/" + filename));
@@ -722,7 +690,6 @@ app.post('/updateAccount', authorizeRequest, function(req,res){
 
 });
 
-
 // Custom middleware to check if user is logged-in
 function authorizeRequest(req, res, next) {
     if (!req.user) {
@@ -733,7 +700,5 @@ function authorizeRequest(req, res, next) {
         next();
     }
 }
-
-
 
 module.exports = app;
