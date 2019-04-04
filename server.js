@@ -37,13 +37,10 @@ app.use(express.static(__dirname + '/public/'))
 app.set('views', [path.join(__dirname, 'views'),           
                   path.join(__dirname, 'views/admin')]);
 
-//app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.enable('trust proxy');
-//app.set('view engine', 'ejs');
-//app.set('views', path.join(__dirname,  '/public/'), path.join(__dirname,  '/views/partials'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -73,7 +73,7 @@ app.get('/admin/products', function (req, res, next){
 });
 
 
-//product sales last week/month/year, Date().getTime()  Returns the number of milliseconds
+//product sales last week/month/year
 app.get('/admin/stats/products', function (req, res, next){
     
       var productSalesWeek = 0;
