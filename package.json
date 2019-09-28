@@ -1,7 +1,7 @@
 {
-  "name": "FoodTastic",
-  "version": "1.0.0",
-  "description": "Online store app",
+  "name": "foodtastic",
+  "version": "1.0.1",
+  "description": "Mean stack online food store app",
   "main": "server.js",
   "engines": {
     "node": ">=4.4.5"
@@ -18,7 +18,7 @@
     "blob-stream": "^0.1.3",
     "blobjs": "^1.1.1",
     "body-parser": "^1.14.1",
-    "bootstrap": "^3.3.7",
+    "bootstrap": ">=3.4.1",
     "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.0",
     "ejs": "^2.5.7",
@@ -27,7 +27,8 @@
     "express-validator": "^2.18.0",
     "file-saver": "^1.3.3",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.2.1",
+    "jquery": ">=3.4.0",
+    "static-eval": ">=2.0.0",
     "mongoose": "^4.11.1",
     "ng-pdfkit": "0.0.1",
     "ngstorage": "^0.3.11",
